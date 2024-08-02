@@ -1,7 +1,7 @@
 <div class="w-full md:w-1/3 xl:w-1/4 p-6">
 
-    <a href="#">
-        <img src="{% url 'product' product.slug %}"
+    <a href="{% url 'product' product.slug %}">
+        <img src="{{ product.get_thumbnail }}"
             class="rounded-xl hover:shadow-lg" alt="">
     </a>
 
