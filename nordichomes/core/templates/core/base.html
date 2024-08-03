@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <title>{% block title %}{% endblock %} | Nordic Homes</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </div>
 
             <div class="menu-right flex items-center space-x-4">
-                <a href="#">
+                <a href="{% url 'myaccount' %}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -35,7 +35,13 @@
                     </svg>
                 </a>
 
-               {% include 'cart/menu_cart.html' %}
+                <div
+                    hx-get="{% url 'hx_menu_cart' %}"
+                    hx-trigger="update-menu-cart-from:body"
+                    hx-swap="innerHTML">
+                
+                    {% include 'cart/menu_cart.html' %}
+                </div>
             </div>
         </div>
     </nav>
