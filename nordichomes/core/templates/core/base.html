@@ -18,11 +18,9 @@
                     <li><a href="{% url 'shop' %}">Shop</a></li>
                     <li><a href="#">About</a></li>
 
-                    
                     {% if request.user.is_authenticated %}
                         <li><a href="{% url 'logout' %}">Log out</a></li>
-                    {% endif %}
-                        
+                    {% endif %}   
                 </ul>
             </div>
 
@@ -41,7 +39,7 @@
                     hx-swap="innerHTML"
                 >
                 
-                    {% include 'cart/menu_cart.html' %}
+                    {% include 'cart/partials/menu_cart.html' %}
                 </div>
             </div>
         </div>

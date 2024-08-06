@@ -2,11 +2,11 @@
 
     <a href="{% url 'product' product.slug %}">
         <img src="{{ product.get_thumbnail }}"
-            class="rounded-xl hover:shadow-lg" alt="">
+            class="w-full hover:shadow-lg" alt="">
     </a>
 
     <div class="pt-3 flex items-center justify-between">
-        <a href="{% url 'product' product.slug %}">{{ product.name }}</a>
+        <a href="{% url 'product' product.slug %}">{{ product.name|truncatewords:4 }}</a>
 
         <a
             href="#"
