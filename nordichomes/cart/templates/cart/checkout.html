@@ -57,24 +57,28 @@
                     <input name="phone" type="phone" class="w-full p-5 rounded-xl">
                 </div>
             </div>
-
-
-            <div class="mb-6 p-6 bg-gray-100 rounded-xl" id="errors" >
-            </div>
         </div>
     </div>
 
-    <div class="summary w-full md:w-1/4 p-6 bg-gray-100 rounded-xl mt-3">
-        <h2 class="uppercase text-lg mb-5">Summary</h2>
+    <div class="w-full md:w-1/4 p-6 bg-gray-100 rounded-xl mt-3">
+        <div class="pb-6">
+            <h2 class="uppercase text-lg mb-5">Summary</h2>
 
-        <div class="mb-6 flex justify-between">
-            <span class="font-semibold">Total</span>
-            <span>${{ cart.get_total_cost }}</span>
+            <div class="mb-6 flex justify-between">
+                <span class="font-semibold">Total</span>
+                <span>${{ cart.get_total_cost }}</span>
+            </div>
+
+            <button onclick="buy(event)"
+                class="inline-block px-6 py-4 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">
+                Confirm Checkout
+            </button>
         </div>
 
-        <button onclick="buy(event)" class="inline-block px-6 py-4 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">
-            Confirm Checkout
-        </button>
+        <hr>
+
+        <div class="mb-6 pt-5 bg-gray-100 rounded-xl" id="errors">
+        </div>
     </div>
 </div>
 {% endblock content %}
@@ -117,9 +121,9 @@
 
         if (errors.length > 0) {
             let html = '<ul>';
-            
+
             errors.forEach((error) => {
-                html += '<li>' + error + '</li>'; 
+                html += '<li>' + error + '</li>';
             })
 
             el.innerHTML = html + '</ul>';
@@ -159,20 +163,20 @@
                 credentials: 'same-origin',
                 body: JSON.stringify(data)
             })
-            .then(function (response) {
-                return response.json()
-            })
-            .then(function (session) {
-                return stripe.redirectToCheckout({ sessionId: session.session.id })
-            })
-            .then(function (result) {
-                if (result.error) {
-                    alert(result.error.message)
-                }
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (session) {
+                    return stripe.redirectToCheckout({ sessionId: session.session.id })
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        alert(result.error.message)
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
         }
 
         return false

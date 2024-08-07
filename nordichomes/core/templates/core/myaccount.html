@@ -4,58 +4,51 @@
 
 {% block content %}
 
-<div class="max-w-6lg mx-auto p-6">
-    <h1 class="mb-5 text-3xl">
-        My account
-    </h1>
+<div class="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <h1 class="mb-5 text-3xl font-semibold text-gray-800">My Account</h1>
 
-    <div class="mb-6">
-        <strong>Name:</strong>{{ request.user.get_full_name }}<br>
-        <strong>Username:</strong>{{ request.user.username }}<br>
-        <strong>E-mail:</strong>{{ request.user.email }}<br>
-
-        <a href="{% url 'edit_myaccount' %}">Edit</a>
+    <div class="mb-6 bg-gray-100 p-6 rounded-lg shadow-sm">
+        <p class="text-lg">
+            <strong>Name: </strong>{{ request.user.get_full_name }}<br>
+            <strong>Username: </strong>{{ request.user.username }}<br>
+            <strong>E-mail: </strong>{{ request.user.email }}<br>
+        </p>
+        <a href="{% url 'edit_myaccount' %}" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Edit</a>
     </div>
 
-    <hr>
+    <hr class="my-6">
 
-    <h2 class="my-6 text-xl">My orders</h2>
+    <h2 class="text-xl font-semibold text-gray-800 my-6">My Orders</h2>
 
     {% for order in request.user.orders.all %}
-        <div class="w-full mb-6 p-6 flex flex-wrap bg-gray-100 rounded-xl">
-            <div class="mb-6 flex justify-between">
-                <a href="#">Order id: {{ order.id }}</a>
+        <div class="w-full mb-6 p-6 bg-gray-100 rounded-lg shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+                <a href="#" class="text-lg font-medium text-blue-500 hover:underline">Order ID: {{ order.id }}</a>
+                <p class="text-lg text-gray-600">Total: ${{ order.get_total_price }}</p>
             </div>
 
-            <div class="mb-6 w-full">
+            <div class="space-y-4">
                 {% for item in order.items.all %}
-                    <div class="product mb-6 flex pr-6">
+                    <div class="flex items-center p-4 bg-white rounded-lg shadow">
                         <a href="#" class="w-1/4">
-                            <img class="hover:shadow-lg rounded-xl" src="{{ item.product.get_thumbnail }}" alt="">
+                            <img class="w-full h-auto rounded-lg hover:shadow-lg" src="{{ item.product.get_thumbnail }}" alt="">
                         </a>
-
                         <div class="w-3/4 pl-6">
-                            <div class="flex justify-between">
-                                <a href="#" class="text-lg">{{ item.product.name }}</a>
-
-                                <p class="mb-6 pt-1 text-gray-400">${{ item.get_total_price }}</p>
+                            <div class="flex justify-between items-start">
+                                <a href="#" class="text-lg font-semibold text-gray-800 hover:underline">{{ item.product.name }}</a>
                             </div>
-
-                            <hr>
-
-                            <div class="mt-6">
-                                Quantity: {{ item.quantity }}
-                            </div>
+                            <p class=" mt-4 text-gray-600">${{ item.get_total_price }}</p>
+                            <p class="mt-4 text-gray-600">Quantity: {{ item.quantity }}</p>
                         </div>
                     </div>
                 {% endfor %}
             </div>
 
-            <div>
+            <div class="mt-4 text-gray-600">
                 <p class="text-lg">Date: {{ order.created_at }}</p>
-                <p class="text-lg">Total: ${{ order.get_total_price }}</p>
             </div>
         </div>
     {% endfor %}
 </div>
+
 {% endblock content %}

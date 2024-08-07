@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views
-from core.views  import frontpage, shop, signup, myaccount, edit_myaccount
+from core.views  import frontpage, shop, signup, myaccount, edit_myaccount, about
 from products.views import product
 
 urlpatterns = [
@@ -12,4 +12,5 @@ urlpatterns = [
     path('myaccount/edit', edit_myaccount, name='edit_myaccount'),
     path('shop/', shop, name='shop'),
     path('shop/<slug:slug>/', product, name='product'),
+    path('about/', about, name='about'),
 ]

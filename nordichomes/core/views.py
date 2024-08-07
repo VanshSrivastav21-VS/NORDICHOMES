@@ -66,3 +66,6 @@ def shop(request):
     }
 
     return render(request, 'core/shop.html', context)
+
+def about(request):
+    return render(request, 'core/about.html')
