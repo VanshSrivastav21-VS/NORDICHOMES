@@ -1,3 +1,4 @@
+
 import json
 import stripe
 
@@ -36,7 +37,7 @@ def start_order(request):
         payment_method_types=['card'],
         line_items=items,
         mode='payment',
-        success_url='http://127.0.0.1:8000/cart/success/',
+        success_url="http://127.0.0.1:8000/cart/success/",
         cancel_url="http://127.0.0.1:8000/cart/",
     )
     payment_intent = session.payment_intent
@@ -50,7 +51,6 @@ def start_order(request):
         zipcode=data['zipcode'], 
         place=data['place'], 
         phone=data['phone'],
-        payment_intent=payment_intent,
         paid=True,
         paid_amount=total_price
     )
